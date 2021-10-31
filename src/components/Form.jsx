@@ -1,5 +1,4 @@
-import React,{useState} from 'react'
-import '../style.css';
+import React,{useState} from 'react';
 
 export default function Form({addJoke}) {
     const [joke,setJoke] = useState({

@@ -1,7 +1,8 @@
 import React, {useState}from "react";
-import '../style.css';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-export default function JokeFilter({id,setup,punchline,Delete}) {
+export default function Home({id,setup,punchline,Delete}) {
     const [isOn, setIsOn] = useState(false);
     const [countLike, setCountLike] = useState(0)
     const [countDislike, setCountDislike] = useState(0)
@@ -10,21 +11,21 @@ export default function JokeFilter({id,setup,punchline,Delete}) {
     const disLike = '👎';
 
     // Count likes when clicked
-    function handleLikeClick (){
+    const handleLikeClick = () => {
         setCountLike(countLike + 1)
     }
 
     // Count dislikes when clicked
-    function handleDisLikeClick (){
+    const handleDisLikeClick = () => {
         setCountDislike(countDislike + 1)
     }
 
     // Displays the punchline jokes when clicked
-    function handleClick () {
+    const handleClick = () => {
         setIsOn(isOn => !isOn)
     }
     
-    // function handleDelete() { 
+    // const handleDelete = () => { 
     //         fetch(`http://localhost:3000/jokes/${id}`, {
     //             method: "DELETE"
     //         } )
@@ -34,10 +35,9 @@ export default function JokeFilter({id,setup,punchline,Delete}) {
     return (
         <div className="card">
             <h3>{setup}</h3>
-
-            <h4 className="answer"onClick={handleClick}> 
-                {isOn ? punchline: "Answer"}</h4>
-
+            <button className="answer"onClick={handleClick}> 
+                {isOn ? punchline: "Answer"}</button>
+               
             <div className="button">
                 <button className="delete" onClick={Delete}> Delete </button> 
                 <button className="like" onClick={handleLikeClick}> {like} {countLike}</button>
@@ -48,7 +48,7 @@ export default function JokeFilter({id,setup,punchline,Delete}) {
     )
 }
 /*********** PATCH ***********/
-// function handleClick (){ 
+// const handleClick = () => { 
 // fetch(`http://localhost:3000/jokes/${joke.id}`,{
         // method: "PATCH",
         // headers: {
@@ -64,7 +64,7 @@ export default function JokeFilter({id,setup,punchline,Delete}) {
 /*********** DELETE ***************** */
 
     // persist changes on server - deletes joke from db.json
-    // function handleDelete() { 
+    // const handleDelete = () => { 
     //     fetch(`http://localhost:3000/jokes/${id}`, {
     //         method: "DELETE"
     //     } )

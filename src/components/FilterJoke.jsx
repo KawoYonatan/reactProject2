@@ -1,12 +1,10 @@
 import React,{useState} from "react";
-import '../style.css';
-import JokeFilter from "./JokeFilter";
 import SearchBar from "./SearchBar";
 
-export default function JokeContainer ({deleteJoke,jokes}) {
+export default function FilterJoke ({jokes,setJokes}) {
     const [filterBy, setFilterBy] = useState("All");
-    
-    function handleFilterChange (event) {
+
+    const handleFilterChange = (event) => {
         setFilterBy(event.target.value);
     }
 
@@ -19,18 +17,13 @@ export default function JokeContainer ({deleteJoke,jokes}) {
         }
         })
     
-    // Deletes jokes identified by their id
-    const jokeList = jokesToDisplay.map((joke) => (
-        <JokeFilter key={joke.id} 
-            id={joke.id}
-            setup={joke.setup} 
-            punchline={joke.punchline} 
-            Delete={() => deleteJoke(joke.id)} />     
-    ))
+    const deleteJoke = (id) =>{
+            const newJokeArr = jokes.filter(joke => joke.id !== id);
+            setJokes(newJokeArr)
+        }
 
     return (
         <div className="jokes"> 
-            <SearchBar jokes={jokes} />
             <div className="filter">
                 <select className="select" name="filter" onChange={handleFilterChange}>
                     <option value="All">Filter Joke Type...</option>
@@ -39,7 +32,7 @@ export default function JokeContainer ({deleteJoke,jokes}) {
                     <option value="knock-knock">Knock-Knock</option>
                 </select>
             </div>
-            {jokeList} 
+            <SearchBar jokesToDisplay={jokesToDisplay} deleteJoke={deleteJoke}/>
         </div>
     )
 }

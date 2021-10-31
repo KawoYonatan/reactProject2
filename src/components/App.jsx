@@ -2,7 +2,7 @@ import '../style.css';
 import { useEffect,useState } from "react"
 import NavBar from "./NavBar";
 import Form from './Form';
-import JokeContainer from './JokeContainer';
+import FilterJoke from './FilterJoke';
 import { Switch,Route} from 'react-router-dom';
 import About from './About';
 
@@ -14,12 +14,6 @@ export default function App() {
       .then(r => r.json())
       .then(setJokes)
     },[]) //[] dependency array - only run once
-
-    
-    function deleteJoke(id) {
-      const newJokeArr = jokes.filter(joke => joke.id !== id);
-      setJokes(newJokeArr)
-    }
 
     const addJoke = (obj) => {
       //console.log(obj,'Yonatan')
@@ -34,8 +28,8 @@ export default function App() {
           <Route path="/form" > <Form addJoke={addJoke}/> </Route>
           <Route path='/about'> <About /> </Route>
           <Route path="/" >
-              <JokeContainer  
-                  deleteJoke={deleteJoke}
+              <FilterJoke  
+                  setJokes={setJokes}
                   jokes={jokes}
               />
           </Route>
